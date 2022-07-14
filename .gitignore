@@ -1,0 +1,42 @@
+# These are some examples of commonly ignored file patterns.
+# You should customize this list as applicable to your project.
+# Learn more about .gitignore:
+#     https://www.atlassian.com/git/tutorials/saving-changes/gitignore
+
+# Node artifact files
+node_modules/
+dist/
+
+# Applications
+*.app
+*.exe
+*.war
+
+# Large media files
+*.tiff
+*.avi
+*.flv
+*.mov
+*.wmv
+*.mp4
+!Modules/Media/Database/data/videos/*.mp4
+
+# Laravel
+/node_modules
+/public/hot
+/public/storage
+/public/css
+/public/js
+/public/mix-manifest.json
+/storage/*.key
+/vendor
+.env
+.env.backup
+.phpunit.result.cache
+docker-compose.override.yml
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+/.idea
+/.vscode
