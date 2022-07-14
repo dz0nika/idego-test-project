@@ -64,10 +64,11 @@ php artisan serve
 After that final step you can visit the test application in your browser, and login with on of the two following users.
 
 For the OTP user input :
-- **Username:** admin@example.com
-- **Password:** 111111
+
+-   **Username:** admin@example.com
+-   **Password:** admin
 
 or for a non OTP user input:
-- **Username:** admin2@example.com
-- **Password:** admin123
 
+-   **Username:** admin2@example.com
+-   **Password:** admin2

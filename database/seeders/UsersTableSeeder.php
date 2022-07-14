@@ -14,18 +14,17 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
+        User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@example.com',
-            'password' => bcrypt('111111'),
+            'password' => bcrypt('admin'),
         ]);
 
-        User::create([
+        User::factory()->create([
             'name' => 'Admin 2',
             'email' => 'admin2@example.com',
-            'otp' => false,
-            'verified_at' => now(),
-            'password' => bcrypt('admin123'),
+            'password' => bcrypt('admin2'),
+            'two_factor_enabled' => true,
         ]);
     }
 }

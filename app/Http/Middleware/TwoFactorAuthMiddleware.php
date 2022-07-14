@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class OtpCheckMiddleware
+class TwoFactorAuthMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,8 +16,10 @@ class OtpCheckMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()?->otp == true) {
-            return redirect()->route('set-password');
+        if (auth()->user() && auth()->user()->two_factor_enabled) {
+            if (! session()->has('user_2fa')) {
+                return redirect()->route('2fa');
+            }
         }
 
         return $next($request);

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TwoFactorAuthController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +25,13 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::middleware(['otp.check'])->group(function () {
+    Route::get('/two-factor-auth', [TwoFactorAuthController::class, 'create'])
+        ->name('2fa');
+
+    Route::post('/two-factor-auth', [TwoFactorAuthController::class, 'store'])
+        ->name('2fa.store');
+
+    Route::middleware(['2fa'])->group(function () {
         Route::post('/logout', [AuthController::class, 'destroy'])
             ->name('logout');
 
@@ -36,10 +43,4 @@ Route::middleware(['auth'])->group(function () {
                 ->name('users');
         });
     });
-
-    Route::get('/set-password', [AuthController::class, 'loadSetPassword'])
-        ->name('set-password');
-
-    Route::post('/set-password', [AuthController::class, 'setPassword'])
-        ->name('set-password');
 });

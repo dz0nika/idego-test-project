@@ -27,7 +27,6 @@
             @reset="reset()"
           >
           </SearchFilter>
-          <PerPageSelect v-model="form.per_page" />
         </div>
       </template>
     </Table>
@@ -38,7 +37,6 @@
 import AuthenticatedLayout from '@/Layouts/Authenticated'
 import Table from '@/Components/Table'
 import SearchFilter from '@/Components/SearchFilter'
-import PerPageSelect from '@/Components/PerPageSelect'
 import pickBy from 'lodash/pickBy'
 import throttle from 'lodash/throttle'
 import mapValues from 'lodash/mapValues'
@@ -67,14 +65,10 @@ const tableHeaders = [
 
 const form = ref({
   search: props.filters.search,
-  per_page: props.filters.per_page ?? 15,
 })
 
 const reset = () => {
   form.value = mapValues(form.value, (value, key) => {
-    if (key == 'per_page') {
-      return value
-    }
     return null
   })
 }

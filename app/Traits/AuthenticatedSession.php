@@ -2,7 +2,6 @@
 
 namespace App\Traits;
 
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Validation\ValidationException;
@@ -49,22 +48,6 @@ trait AuthenticatedSession
     public function username()
     {
         return 'email';
-    }
-
-    /**
-     * Attempt to authenticate the request's credentials.
-     *
-     * @return void
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function setNewPassword()
-    {
-        Auth::user()->update([
-            'password' => bcrypt(Request::get('password')),
-            'otp' => false,
-            'verified_at' => now(),
-        ]);
     }
 
     /**

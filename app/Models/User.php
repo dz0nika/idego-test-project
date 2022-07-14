@@ -21,8 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'verified_at',
-        'otp',
+        'email_verified_at',
+        'two_factor_enabled',
+        'two_factor_secret',
+        'two_factor_confirmed_at',
     ];
 
     /**
@@ -41,7 +43,7 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'verified_at' => 'datetime',
+        'email_verified_at' => 'datetime',
     ];
 
     /**
@@ -53,5 +55,19 @@ class User extends Authenticatable
     public function newEloquentBuilder($builder)
     {
         return new UserBuilder($builder);
+    }
+
+    /**
+     * Generate new two factor auth secret
+     *
+     * @return void
+     */
+    public function generateTwoFactorAuthCode()
+    {
+        $code = '111111'; // TODO: implement random code generation of 6 numbers and send code to user
+
+        $this->update([
+            'two_factor_secret' => '111111',
+        ]);
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SetPasswordRequest extends FormRequest
+class TwoFactorVerificationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,7 @@ class SetPasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'password' => 'required|string|confirmed|min:6',
-            'password_confirmation' => 'required|min:6|same:password',
+            'code' => ['required', 'string', 'min:6', 'max:6'],
         ];
     }
 }

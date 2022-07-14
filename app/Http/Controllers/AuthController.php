@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
-use App\Http\Requests\SetPasswordRequest;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use App\Traits\AuthenticatedSession;
@@ -53,32 +52,11 @@ class AuthController extends Controller
 
         $this->authenticate();
 
-        if ($user->otp == true) {
-            return $this->loadSetPassword();
+        if ($user->two_factor_enabled) {
+            $user->generateTwoFactorAuthCode();
+
+            return redirect()->route('2fa');
         }
-
-        return redirect()->intended(RouteServiceProvider::HOME);
-    }
-
-    /**
-     * Display the login view.
-     *
-     * @return \Inertia\Response
-     */
-    public function loadSetPassword()
-    {
-        return Inertia::render('Auth/OTPForm');
-    }
-
-    /**
-     * Handle an incoming authentication request.
-     *
-     * @param  \App\Http\Requests\SetPasswordRequest  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function setPassword(SetPasswordRequest $request)
-    {
-        $this->setNewPassword();
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }
