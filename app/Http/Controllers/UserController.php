@@ -15,11 +15,11 @@ class UserController extends Controller
     public function index()
     {
         return Inertia::render('User/Index', [
-            'filters' => request()->all('search', 'per_page'),
+            'filters' => request()->all('search'),
             'users' => User::filter(request()->only('search'))
                 ->latest()
-                ->paginate((int) request()->per_page)
-                ->appends(request()->all('search', 'per_page'))
+                ->paginate(10)
+                ->appends(request()->all('search'))
                 ->through(function ($user) {
                     return array_merge(
                         $user->only(
