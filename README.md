@@ -1,4 +1,4 @@
-# Ping CRM
+# Nikola Popovic Test App
 
 A demo application made for the Idego Group recruitment process.
 
